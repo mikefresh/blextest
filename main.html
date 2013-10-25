@@ -1,0 +1,161 @@
+<!DOCTYPE html
+<html>
+<head>
+  <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.css" />
+  <script type="text/javascript" src="mustache.js"></script>  
+
+  <script language="javascript" type="text/javascript" src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+  <script language="javascript" type="text/javascript" src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>  
+  <script language="javascript" type="text/javascript" src="paraffin/lib/leaflet/leaflet.js"></script>
+  <script language="javascript" type="text/javascript" src="paraffin/lib/leaflet/plugins/google.js"></script>
+  <script language="javascript" type="text/javascript" src="paraffin/lib/leaflet/plugins/leaflet-hash.js"></script>
+  <script language="javascript" type="text/javascript" src="paraffin/lib/leaflet/plugins/leaflet.utfgrid.js"></script>
+  <script language="javascript" type="text/javascript" src="paraffin/lib/leaflet/plugins/proj4leaflet.js"></script>
+  <script language="javascript" type="text/javascript" src="paraffin/lib/leaflet/plugins/tilejson.js"></script>
+  <script language="javascript" type="text/javascript" src="paraffin/lib/leaflet/leaflet.draw.js"></script>
+  <script language="javascript" type="text/javascript" src="paraffin/lib/leaflet/leaflet.draw.js"></script>
+  <script language="javascript" type="text/javascript" src="paraffin/lib/spin.min.js"></script>
+  <script language="javascript" type="text/javascript" src="paraffin/lib/tile.stamen.js"></script>
+  <script language="javascript" type="text/javascript" src="paraffin/lib/tile/Bing.js"></script>
+  <script language="javascript" type="text/javascript" src="paraffin/lib/tile/Google.js"></script>  
+  <script language="javascript" type="text/javascript" src="paraffin/lib/tile/Yandex.js"></script>  
+  <script language="javascript" type="text/javascript" src="paraffin/lib/jquery.xdomainrequest.js"></script>                          
+                        
+                        
+            
+  <script language="javascript" type="text/javascript" src="paraffin.js"></script>
+  
+  
+  
+  
+  
+  
+  <style>
+  html, body{
+    padding:0px;
+    margin: 0px;
+  }
+    #themap, html, body{
+      height:90%;
+    }
+  </style>
+  
+  <script type="text/javascript">  
+  function uploadFromGallery() {
+
+      // Retrieve image file location from specified source
+      navigator.camera.getPicture(uploadPhoto,
+                                  function(message) { alert('get picture failed'); },
+                                  { quality: 50, 
+                                  destinationType: navigator.camera.DestinationType.FILE_URI,
+                                  sourceType: navigator.camera.PictureSourceType.PHOTOLIBRARY }
+                                  );
+
+  }
+
+  function uploadPhoto(imageURI) {
+      var options = new FileUploadOptions();
+      options.fileKey="file";
+      options.fileName=imageURI.substr(imageURI.lastIndexOf('/')+1)+'.png';
+      options.mimeType="text/plain";
+
+      var params = new Object();
+
+      options.params = params;
+
+      var ft = new FileTransfer();
+      ft.upload(imageURI, encodeURI("http://some.server.com/upload.php"), win, fail, options);
+  }
+
+  function win(r) {
+      console.log("Code = " + r.responseCode);
+      console.log("Response = " + r.response);
+      console.log("Sent = " + r.bytesSent);
+  }
+
+  function fail(error) {
+      alert("An error has occurred: Code = " + error.code);
+      console.log("upload error source " + error.source);
+      console.log("upload error target " + error.target);
+  }
+  </script>
+  </head>
+  <body>
+    
+     
+
+
+    <div class="wrapper">
+      <a data-role="button" onClick="uploadFromGallery();">Upload from Gallery</a>
+    </div>
+    
+  <div id="themap">
+    
+
+    
+  </div>
+
+  <script>
+  var pm;
+  var baseLayers = ["bing", "street"];
+
+  var layers = [{
+    "url":"http://tiles.makeloveland.com:8888/v2/fall2013blext.json",
+    "id":"sitecontrol",
+    "name":"Parcels",
+    "ty":"tilejson",
+    "template":"<b class='propaddy'>{{address}}(Auction)</b><br/><a href='#' class='btn use_parcel' data-dataset='snake' data-id='{{fid}}'>Blext this property</a>",
+    "style":null,
+    "style_handler":null,
+    "key":null,
+    "interaction":true,
+    "zindex":3
+  },  {
+      "url":"http://tiles.makeloveland.com:8888/v2/parcels2012.json",
+      "id":"sitecontrol",
+      "name":"Parcels",
+      "ty":"tilejson",
+      "template":"<b class='propaddy'>{{proaddress}}</b><br/><a href='#' class='btn use_parcel' data-dataset='sitecontrol' data-id='{{fid}}'>Blext this property</a>",
+      "style":null,
+      "style_handler":null,
+      "key":null,
+      "interaction":true,
+      "zindex":2
+    }];
+
+        var opts = {
+          divId:  'themap',
+          geolocate: 'auto',
+          zoom:    15,
+          minZoom: 10,
+          maxZoom: 18,
+          center: { lat: 42.5, lon: -83.1 },
+          layerControl:   true,
+          cloudmadeKey:   '8b7b6b9070e64ea3bb6c2a70cea2a2aa',
+          cloudmadeStyle: 997,
+          hash: false,
+        };
+
+        function foundLocation(position) {
+         var lat = position.coords.latitude;
+         var long = position.coords.longitude;
+         pm.map.panTo([lat, long])
+         pm.map.setZoom(15);
+         marker = L.marker([lat, long], {draggable: true}).addTo(pm.map);
+        }
+
+        function noLocation() {
+            alert('Could not find location');
+        }
+
+    $(document).ready(function(){
+      pm = new Paraffin.Map(opts); 
+      pm.initializeLayers(baseLayers, layers);
+
+      navigator.geolocation.getCurrentPosition(foundLocation, noLocation);
+    });
+  </script>
+
+
+
+</body></html>
