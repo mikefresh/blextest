@@ -98,9 +98,9 @@
   function capturePhoto(){
       navigator.camera.getPicture(uploadPhoto,null,{sourceType:1,quality:60,destinationType:Camera.DestinationType.DATA_URL});
   }
+  
   function uploadPhoto(data){
-  // this is where you would send the image file to server
-  //output image to screen
+
       cameraPayload = data
       cameraPic.src = "data:image/jpeg;base64," + data;
       
@@ -115,9 +115,7 @@
           y: y,
           image_type: 'image/jpeg',
           image: cameraPayload}
-      }, function(data){
-        alert('uploading');
-      });
+      }});
       
   }
   </script>
