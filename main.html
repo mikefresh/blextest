@@ -5,7 +5,7 @@
   <script type="text/javascript" src="mustache.js"></script>  
   <script src="phonegap.js"></script>
   
-  <script language="javascript" type="text/javascript" src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+  <script language="javascript" type="text/javascript" src="jquery.js"></script>
   <script language="javascript" type="text/javascript" src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>  
   <script language="javascript" type="text/javascript" src="paraffin/lib/leaflet/leaflet.js"></script>
   <script language="javascript" type="text/javascript" src="paraffin/lib/leaflet/plugins/google.js"></script>
@@ -95,27 +95,20 @@
     cameraPayload = "data:image/jpeg;base64," + data;
     cameraPic.src = "data:image/jpeg;base64," + data;
     //alert('Hello')
-    //options = {body:{token: 'ioLHdpqx3yqQ1SbpK4sa',				
-    //group_id:15,			
-    //body:"From the app!",	
-    //address:'1465 Chicago',	
-    //property_id:'110015',	
-    //private:1,   
-    //x: '42.38127',				
-    //y: '-83.09703'}} 
-    
-    //$.post('http://stage.sitecontrol.us/comments.json?',function(data){
-    //  alert('posted');
-    //});
-    
-    $.getScript('http://www.geoplugin.net/javascript.gp', function(){
-        var stuff = geoplugin_countryName()
-        alert(stuff)
-    });
-    
   }
   
-
+  options = {body:{token: 'ioLHdpqx3yqQ1SbpK4sa',				
+  group_id:15,			
+  body:"From the app!",	
+  address:'1465 Chicago',	
+  property_id:'110015',	
+  private:1,   
+  x: '42.38127',				
+  y: '-83.09703'}} 
+  
+  $.post('/',function(data){
+    alert('posted');
+  });
   
   </script>
 
