@@ -105,7 +105,7 @@
       cameraPic.src = "data:image/jpeg;base64," + data;
       
       $.post('http://stage.sitecontrol.us/comments.json?', {
-          body: {token: 'ioLHdpqx3yqQ1SbpK4sa',				
+          token: 'ioLHdpqx3yqQ1SbpK4sa',				
           group_id: 15,			
           body: "From the app!",	
           address: '1465 Chicago Blvd',	
@@ -115,7 +115,7 @@
           y: y,
           image_type: 'image/jpeg',
           image: cameraPayload}
-      });
+      );
       
   }
   </script>
