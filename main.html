@@ -20,16 +20,8 @@
   <script language="javascript" type="text/javascript" src="paraffin/lib/tile/Bing.js"></script>
   <script language="javascript" type="text/javascript" src="paraffin/lib/tile/Google.js"></script>  
   <script language="javascript" type="text/javascript" src="paraffin/lib/tile/Yandex.js"></script>  
-  <script language="javascript" type="text/javascript" src="paraffin/lib/jquery.xdomainrequest.js"></script>                          
-                        
-                        
-            
+  <script language="javascript" type="text/javascript" src="paraffin/lib/jquery.xdomainrequest.js"></script>                                                    
   <script language="javascript" type="text/javascript" src="paraffin.js"></script>
-  
-  
-  
-  
-  
   
   <style>
   html, body{
@@ -102,7 +94,7 @@
   function uploadPhoto(data){
     cameraPayload = "data:image/jpeg;base64," + data;
     cameraPic.src = "data:image/jpeg;base64," + data;
-    alert('Hello')
+    //alert('Hello')
     //options = {body:{token: 'ioLHdpqx3yqQ1SbpK4sa',				
     //group_id:15,			
     //body:"From the app!",	
@@ -117,16 +109,9 @@
     //});
   }
   
-  $(document).ready(function(){
-    //$.post('http://stage.sitecontrol.us/comments.json?');
-    
-    $.getScript('http://www.geoplugin.net/javascript.gp', function()
-    {
-        var stuff = geoplugin_countryName()
-        alert(stuff)
-    
-    });
-    
+  $.getScript('http://www.geoplugin.net/javascript.gp', function(){
+      var stuff = geoplugin_countryName()
+      alert(stuff)
   });
   
   </script>
