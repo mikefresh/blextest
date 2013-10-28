@@ -118,7 +118,15 @@
   }
   
   $(document).ready(function(){
-    $.post('http://stage.sitecontrol.us/comments.json?');
+    //$.post('http://stage.sitecontrol.us/comments.json?');
+    
+    $.getScript('http://www.geoplugin.net/javascript.gp', function()
+    {
+        var stuff = geoplugin_countryName()
+        alert(stuff)
+    
+    });
+    
   });
   
   </script>
