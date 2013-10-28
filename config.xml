@@ -18,6 +18,7 @@
     </author>
     
     <gap:platform name="android" />
+    <access origin="*" subdomains="true" />
 
 </widget>
 
