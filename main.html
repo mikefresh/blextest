@@ -95,7 +95,11 @@
     cameraPayload = "data:image/jpeg;base64," + data;
     cameraPic.src = "data:image/jpeg;base64," + data;
     
-    options = {body:{token: 'ioLHdpqx3yqQ1SbpK4sa',				
+   
+  }
+  
+  
+   options = {body:{token: 'ioLHdpqx3yqQ1SbpK4sa',				
     group_id:15,			
     body:"From the app!",	
     address:'1465 Chicago',	
@@ -105,10 +109,8 @@
     y: '-83.09703'}} 
 
     $.post('http://stage.sitecontrol.us/comments.json?', options, function(){
-      alert('sending');
-    });
-  }
-  
+      alert('Somethign happend');
+    }, "jsonp");
 
   
   </script>
