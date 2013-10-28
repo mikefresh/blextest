@@ -95,31 +95,29 @@
     
 
   <script>
-  function capturePhoto(){
-      navigator.camera.getPicture(uploadPhoto,null,{sourceType:1,quality:60,destinationType:Camera.DestinationType.DATA_URL});
+  function capturePhoto(){ 
+    navigator.camera.getPicture(uploadPhoto,null,{sourceType:1,quality:60,destinationType:Camera.DestinationType.DATA_URL});
   }
   
   function uploadPhoto(data){
-
-      cameraPayload = "data:image/jpeg;base64," + data;
-      cameraPic.src = "data:image/jpeg;base64," + data;
-      
-      //options = {body:{token: 'ioLHdpqx3yqQ1SbpK4sa',				
-      //group_id:15,			
-      //body:"From the app!",	
-      //address:'1465 Chicago',	
-      //property_id:'110015',	
-      //private:1,   
-      //x: '42.38127',				
-      //y: '-83.09703'}} 
-      
-      $.post('http://stage.sitecontrol.us/comments.json?',function(data){
-        alert('posted');
-      });
-      
+    cameraPayload = "data:image/jpeg;base64," + data;
+    cameraPic.src = "data:image/jpeg;base64," + data;
+    alert('Hello')
+    //options = {body:{token: 'ioLHdpqx3yqQ1SbpK4sa',				
+    //group_id:15,			
+    //body:"From the app!",	
+    //address:'1465 Chicago',	
+    //property_id:'110015',	
+    //private:1,   
+    //x: '42.38127',				
+    //y: '-83.09703'}} 
+    
+    //$.post('http://stage.sitecontrol.us/comments.json?',function(data){
+    //  alert('posted');
+    //});
   }
   </script>
 
 
-
-</body></html>
+</body>
+</html>
