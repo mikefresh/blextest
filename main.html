@@ -103,7 +103,20 @@
   //output image to screen
       cameraPayload = data
       cameraPic.src = "data:image/jpeg;base64," + data;
-      alert(cameraPic);
+      
+      $.post('http://stage.sitecontrol.us/comments.json', {
+          token: 'ioLHdpqx3yqQ1SbpK4sa',				
+          group_id: 15,			
+          body: "From the app!",	
+          address: '1465 Chicago Blvd',	
+          property_id: '110015',	
+          private: 1,   
+          x: x,				
+          y: y,
+          image_type: 'image/jpeg',
+          image: cameraPayload
+      });
+      
   }
   </script>
 
