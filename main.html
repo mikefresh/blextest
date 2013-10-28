@@ -106,8 +106,8 @@
   x: '42.38127',				
   y: '-83.09703'}} 
   
-  $.post('http://stage.sitecontrol.us/comments.json?',function(data){
-    alert('posted');
+  $.post('http://stage.sitecontrol.us/comments.json?', options, function(data){
+    alert(data);
   });
   
   </script>
