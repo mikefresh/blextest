@@ -18,7 +18,7 @@
     </author>
     
     <gap:platform name="android" />
-    <access origin="*" />
+    <access origin="http://sitecontrol.us" subdomains="true"/>
 
 </widget>
 
