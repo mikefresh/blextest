@@ -87,32 +87,34 @@
     
 
   <script>
-  function capturePhoto(){ 
-    navigator.camera.getPicture(uploadPhoto,null,{sourceType:1,quality:60,destinationType:Camera.DestinationType.DATA_URL});
-  }
+    function capturePhoto(){ 
+      navigator.camera.getPicture(uploadPhoto,null,{sourceType:1,quality:60,destinationType:Camera.DestinationType.DATA_URL});
+    }
   
-  function uploadPhoto(data){
-    cameraPayload = "data:image/jpeg;base64," + data;
-    cameraPic.src = "data:image/jpeg;base64," + data;
+    function uploadPhoto(data){
+      cameraPayload = "data:image/jpeg;base64," + data;
+      cameraPic.src = "data:image/jpeg;base64," + data;
+    }
+  
+    options = {books:{title: 'Lord of the Rings', author: 'batman'}} 
     
-   
-  }
-  
-  
-   options = {body:{token: 'ioLHdpqx3yqQ1SbpK4sa',				
-    group_id:15,			
-    body:"From the app!",	
-    address:'1465 Chicago',	
-    property_id:'110015',	
-    private:1,   
-    x: '42.38127',				
-    y: '-83.09703'}} 
+    $.support.cors = true;
+    
+    $.ajax({
+      type: "POST", // you request will be a post request
+      data: options, // javascript object with all my params
+      url: 'http://glacial-hollows-3349.herokuapp.com/books', // my backoffice comunication api url
+      dataType: "json", // datatype can be json or jsonp
+      crossDomain: true,
+      success: function(result){
+        console.dir(result);
+      }
+    });
+    
 
-    $.post('http://stage.sitecontrol.us/comments.json?', options, function(){
-      alert('Somethign happend');
-    }, "jsonp");
-
-  
+    //$.post('http://localhost:3000/books', options, function(){
+    //  alert('Somethign happend');
+    //}, "jsonp");
   </script>
 
 
