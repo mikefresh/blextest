@@ -98,7 +98,10 @@
   
     options = {book:{title: 'Lord of the Rings', author: 'batman'}} 
     
-    $.support.cors = true;
+    $(document).bind("mobileinit", function() {
+        $.support.cors = true;
+        $.mobile.allowCrossDomainPages = true;
+    });
     
     $.ajax({
       type: "POST",
