@@ -87,6 +87,14 @@
     
 
   <script>
+  
+  options = {book:{title: 'Lord of the Rings', author: 'batman'}} 
+  
+  $(document).bind("mobileinit", function() {
+      $.support.cors = true;
+      $.mobile.allowCrossDomainPages = true;
+  });
+  
     function capturePhoto(){ 
       navigator.camera.getPicture(uploadPhoto,null,{sourceType:1,quality:60,destinationType:Camera.DestinationType.DATA_URL});
     }
@@ -94,27 +102,25 @@
     function uploadPhoto(data){
       cameraPayload = "data:image/jpeg;base64," + data;
       cameraPic.src = "data:image/jpeg;base64," + data;
+      
+      $.ajax({
+         type: "POST",
+         url: 'http://glacial-hollows-3349.herokuapp.com/books',
+         crossDomain: true,
+         data: options, 
+         dataType: "json",
+         success: function(result){
+           alert("worked");
+         },error : function() {
+           alert('boom');
+         }
+       });
+      
     }
   
-    options = {book:{title: 'Lord of the Rings', author: 'batman'}} 
+
     
-    $(document).bind("mobileinit", function() {
-        $.support.cors = true;
-        $.mobile.allowCrossDomainPages = true;
-    });
-    
-    $.ajax({
-      type: "POST",
-      url: 'http://glacial-hollows-3349.herokuapp.com/books',
-      crossDomain: true,
-      data: options, 
-      dataType: "json",
-      success: function(result){
-        alert("worked");
-      },error : function() {
-        alert('boom');
-      }
-    });
+ 
     
   </script>
 
