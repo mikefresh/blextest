@@ -105,12 +105,10 @@
     
     $.ajax({
       type: "POST",
-      data: options, 
-      async: false,
       url: 'http://glacial-hollows-3349.herokuapp.com/books',
-      //url: 'http://glacial-hollows-3349.herokuapp.com/books', 
-      dataType: "json",
       crossDomain: true,
+      data: options, 
+      dataType: "json",
       success: function(result){
         alert("worked");
       },error : function() {
@@ -118,10 +116,6 @@
       }
     });
     
-
-    //$.post('http://localhost:3000/books', options, function(){
-    //  alert('Somethign happend');
-    //}, "jsonp");
   </script>
 
 
