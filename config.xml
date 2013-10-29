@@ -17,8 +17,6 @@
         Hardeep Shoker 
     </author>
     
-    <feature name="http://api.phonegap.com/1.0/device" />
-    
     <gap:platform name="android" />
     <access origin="*" />
 
