@@ -18,7 +18,7 @@
     </author>
     
     <gap:platform name="android" />
-    <access origin="http://herokuapp.us" subdomains="true"/>
+    <access origin="http://herokuapp.com" subdomains="true"/>
 
 </widget>
 
