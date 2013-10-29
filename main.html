@@ -96,15 +96,16 @@
       cameraPic.src = "data:image/jpeg;base64," + data;
     }
   
-    options = {books:{title: 'Lord of the Rings', author: 'batman'}} 
+    options = {book:{title: 'Lord of the Rings', author: 'batman'}} 
     
     $.support.cors = true;
     
     $.ajax({
-      type: "POST", // you request will be a post request
-      data: options, // javascript object with all my params
-      url: 'http://glacial-hollows-3349.herokuapp.com/books', // my backoffice comunication api url
-      dataType: "json", // datatype can be json or jsonp
+      type: "POST",
+      data: options, 
+      url: 'http://glacial-hollows-3349.herokuapp.com/books',
+      //url: 'http://glacial-hollows-3349.herokuapp.com/books', 
+      dataType: "json",
       crossDomain: true,
       success: function(result){
         console.dir(result);
