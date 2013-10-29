@@ -106,6 +106,7 @@
     $.ajax({
       type: "POST",
       data: options, 
+      async: false,
       url: 'http://glacial-hollows-3349.herokuapp.com/books',
       //url: 'http://glacial-hollows-3349.herokuapp.com/books', 
       dataType: "json",
