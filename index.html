@@ -111,25 +111,12 @@
     maxZoom: 18,
     center: { lat: 42.5, lon: -83.1 },
     layerControl:   true,
+    geolocate: 'true',
     cloudmadeKey:   '8b7b6b9070e64ea3bb6c2a70cea2a2aa',
     cloudmadeStyle: 997,
     hash: false,
   };
   
-  function foundLocation(position) {
-    var lat = position.coords.latitude;
-    var long = position.coords.longitude;
-    pm.map.panTo([lat, long])
-    pm.map.setZoom(17);
-    marker = L.marker([lat, long], {draggable: true}).addTo(pm.map);
-    //get_auction_props();
-   }
-   
-   function noLocation() {
-       alert('Could not find location');
-   }
- 
-   var marker;
    
    function capturePhoto(){
       navigator.camera.getPicture(uploadPhoto,null,{sourceType:1,quality:30,destinationType:Camera.DestinationType.DATA_URL});}
@@ -170,7 +157,6 @@
     pm = new Paraffin.Map(opts); 
     pm.initializeLayers(baseLayers, layers);
 
-    navigator.geolocation.getCurrentPosition(foundLocation, noLocation);
   });
 
 </script>
