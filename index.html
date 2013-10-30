@@ -1,12 +1,16 @@
-<!DOCTYPE html
+<!DOCTYPE html>
 <html>
 <head>
   <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.css" />
   <script type="text/javascript" src="mustache.js"></script>  
 
-  <script language="javascript" type="text/javascript" src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
-  <script language="javascript" type="text/javascript" src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>  
+  <script type="text/javascript" src="phonegap.js"></script>
+  
+  <script language="javascript" type="text/javascript" src="jquery.js"></script>
+  <script language="javascript" type="text/javascript" src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script> 
+   
   <script language="javascript" type="text/javascript" src="paraffin/lib/leaflet/leaflet.js"></script>
+  <script language="javascript" type="text/javascript" src="paraffin.js"></script>
   <script language="javascript" type="text/javascript" src="paraffin/lib/leaflet/plugins/google.js"></script>
   <script language="javascript" type="text/javascript" src="paraffin/lib/leaflet/plugins/leaflet-hash.js"></script>
   <script language="javascript" type="text/javascript" src="paraffin/lib/leaflet/plugins/leaflet.utfgrid.js"></script>
@@ -18,104 +22,68 @@
   <script language="javascript" type="text/javascript" src="paraffin/lib/tile.stamen.js"></script>
   <script language="javascript" type="text/javascript" src="paraffin/lib/tile/Bing.js"></script>
   <script language="javascript" type="text/javascript" src="paraffin/lib/tile/Google.js"></script>  
-  <script language="javascript" type="text/javascript" src="paraffin/lib/tile/Yandex.js"></script>  
-  <script language="javascript" type="text/javascript" src="paraffin/lib/jquery.xdomainrequest.js"></script>                          
-                        
-                        
-            
-  <script language="javascript" type="text/javascript" src="paraffin.js"></script>
-  
-  
-  
-  
-  
+ 
+  <script language="javascript" type="text/javascript" src="paraffin/lib/jquery.xdomainrequest.js"></script>                                                    
+
   
   <style>
-  html, body{
-    padding:0px;
-    margin: 0px;
+  button.camera-control {
+    background-color: #f3f3f3;
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #f3f3f3), color-stop(50%, #dddddd), color-stop(50%, #d2d2d2), color-stop(100%, #dfdfdf));
+    background-image: -webkit-linear-gradient(top, #f3f3f3 0%, #dddddd 50%, #d2d2d2 50%, #dfdfdf 100%);
+    background-image: linear-gradient(top, #f3f3f3 0%, #dddddd 50%, #d2d2d2 50%, #dfdfdf 100%);
+    border-right: 1px solid #dfdfdf;
+    border-bottom: 1px solid #b4b4b4;
+    border-right: 1px solid #dfdfdf;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    -webkit-box-shadow: inset 0 1px 0 0 white, 0 1px 0 0 #d5d5d5, 0 -1px 2px 1px #efefef;
+    box-shadow: inset 0 1px 0 0 white, 0 1px 0 0 #d5d5d5, 0 -1px 2px 1px #efefef;
+    color: #666;
+    display: block;
+    font: bold 16px "helvetica neue", helvetica, arial, sans-serif;
+    margin: 10px auto;
+    padding: 7px 0;
+    text-shadow: 0 1px 1px #fff;
+    width: 150px;
   }
-    #themap, html, body{
-      height:90%;
-    }
-  </style>
+  button.camera-control:hover {
+      background-color: #e5e5e5;
+      background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #e5e5e5), color-stop(50%, #d1d1d1), color-stop(50%, #c4c4c4), color-stop(100%, #b8b8b8));
+      background-image: -webkit-linear-gradient(top, #e5e5e5 0%, #d1d1d1 50%, #c4c4c4 50%, #b8b8b8 100%);
+      background-image: linear-gradient(top, #e5e5e5 0%, #d1d1d1 50%, #c4c4c4 50%, #b8b8b8 100%);
+      -webkit-box-shadow: inset 0 1px 0 0 #f2f2f2, 0 1px 0 0 #c9c9c9, 0 -1px 2px 1px #e3e3e3;
+      box-shadow: inset 0 1px 0 0 #f2f2f2, 0 1px 0 0 #c9c9c9, 0 -1px 2px 1px #e3e3e3; }
+    button.camera-control:active {
+      -webkit-box-shadow: inset 0 0 30px 0 #999999, 0 1px 0 0 white;
+      box-shadow: inset 0 0 30px 0 #999999, 0 1px 0 0 white;
+  }
   
-  <script type="text/javascript">  
-  function uploadFromGallery() {
-
-      // Retrieve image file location from specified source
-      navigator.camera.getPicture(uploadPhoto,
-                                  function(message) { alert('get picture failed'); },
-                                  { quality: 50, 
-                                  destinationType: navigator.camera.DestinationType.FILE_URI,
-                                  sourceType: navigator.camera.PictureSourceType.PHOTOLIBRARY }
-                                  );
-
+  #themap{
+    height: 200px;
   }
-
-  function uploadPhoto(imageURI) {
-      var options = new FileUploadOptions();
-      options.fileKey="file";
-      options.fileName=imageURI.substr(imageURI.lastIndexOf('/')+1)+'.png';
-      options.mimeType="text/plain";
-
-      var params = new Object();
-
-      options.params = params;
-
-      var ft = new FileTransfer();
-      ft.upload(imageURI, encodeURI("http://some.server.com/upload.php"), win, fail, options);
-  }
-
-  function win(r) {
-      console.log("Code = " + r.responseCode);
-      console.log("Response = " + r.response);
-      console.log("Sent = " + r.bytesSent);
-  }
-
-  function fail(error) {
-      alert("An error has occurred: Code = " + error.code);
-      console.log("upload error source " + error.source);
-      console.log("upload error target " + error.target);
-  }
-  </script>
+  
+  </style>
   </head>
-  <body>
+<body>
     
-     
-
-
-    <div class="wrapper">
-      <a data-role="button" onClick="uploadFromGallery();">Upload from Gallery</a>
+    <p>Testing the view</p>
+    
+    <div id="themap">
+      
     </div>
-    
-  <div id="themap">
-    
 
-    
-  </div>
 
-  <script>
+<script> 
   var pm;
-  var baseLayers = ["bing", "street"];
+  var baseLayers = ["street"];
 
   var layers = [{
-    "url":"http://tiles.makeloveland.com:8888/v2/fall2013blext.json",
-    "id":"sitecontrol",
-    "name":"Parcels",
-    "ty":"tilejson",
-    "template":"<b class='propaddy'>{{address}}(Auction)</b><br/><a href='#' class='btn use_parcel' data-dataset='snake' data-id='{{fid}}'>Blext this property</a>",
-    "style":null,
-    "style_handler":null,
-    "key":null,
-    "interaction":true,
-    "zindex":3
-  },  {
       "url":"http://tiles.makeloveland.com:8888/v2/parcels2012.json",
       "id":"sitecontrol",
       "name":"Parcels",
       "ty":"tilejson",
-      "template":"<b class='propaddy'>{{proaddress}}</b><br/><a href='#' class='btn use_parcel' data-dataset='sitecontrol' data-id='{{fid}}'>Blext this property</a>",
+      "template":"something",
       "style":null,
       "style_handler":null,
       "key":null,
@@ -123,39 +91,80 @@
       "zindex":2
     }];
 
-        var opts = {
-          divId:  'themap',
-          geolocate: 'auto',
-          zoom:    15,
-          minZoom: 10,
-          maxZoom: 18,
-          center: { lat: 42.5, lon: -83.1 },
-          layerControl:   true,
-          cloudmadeKey:   '8b7b6b9070e64ea3bb6c2a70cea2a2aa',
-          cloudmadeStyle: 997,
-          hash: false,
-        };
+  var opts = {
+    divId:  'themap',
+    geolocate: 'manual',
+    zoom:    18,
+    minZoom: 15,
+    maxZoom: 18,
+    center: { lat: 42.5, lon: -83.1 },
+    layerControl:   true,
+    geolocate: 'manual',
+    cloudmadeKey:   '8b7b6b9070e64ea3bb6c2a70cea2a2aa',
+    cloudmadeStyle: 997,
+    hash: false,
+  };
+  
+   
+   function capturePhoto(){
+      navigator.camera.getPicture(uploadPhoto,null,{sourceType:1,quality:30,destinationType:Camera.DestinationType.DATA_URL});}
 
-        function foundLocation(position) {
-         var lat = position.coords.latitude;
-         var long = position.coords.longitude;
-         pm.map.panTo([lat, long])
-         pm.map.setZoom(15);
-         marker = L.marker([lat, long], {draggable: true}).addTo(pm.map);
-        }
+    function uploadPhoto(data){
+      cameraPayload = data;
+      cameraPic.src = "data:image/jpeg;base64," + data;  
 
-        function noLocation() {
+      options = {token: 'EcUDYrJA4z1SYRjc1ymx',                                
+          body: 'from android',
+          group_id: '33',
+          image: cameraPayload,
+          image_type: 'image/jpeg',
+          address: '4605 CASS',
+          property_id: '282530',    
+          private:1,   
+          x: '',                                
+          y: ''}
+
+      $.ajax({
+         type: "POST",
+         url: 'http://sitecontrol.us/comments.json?',
+         crossDomain: true,
+         data: options, 
+         dataType: "json",
+         success: function(result){
+           alert(result[0]);
+         },error : function() {
+           alert('boom');
+         }
+       });
+    }
+    
+     function foundLocation(position) {
+       var lat = position.coords.latitude;
+       var long = position.coords.longitude;
+       pm.map.panTo([lat, long])
+       pm.map.setZoom(17);
+       marker = L.marker([lat, long], {draggable: true}).addTo(pm.map);
+      }
+      
+       function noLocation() {
             alert('Could not find location');
         }
+        
+        var marker;
 
-    $(document).ready(function(){
-      pm = new Paraffin.Map(opts); 
-      pm.initializeLayers(baseLayers, layers);
+  $(document).ready(function(){
 
-      navigator.geolocation.getCurrentPosition(foundLocation, noLocation);
-    });
-  </script>
+    $.support.cors = true;
+
+    pm = new Paraffin.Map(opts); 
+    pm.initializeLayers(baseLayers, layers);
+
+    navigator.geolocation.getCurrentPosition(foundLocation, noLocation);
+
+  });
+
+</script>
 
 
-
-</body></html>
+</body>
+</html>
