@@ -89,31 +89,28 @@
       cameraPayload = "data:image/jpeg;base64," + data;
       cameraPic.src = "data:image/jpeg;base64," + data;  
       
-              options = {body:{token: 'ioLHdpqx3yqQ1SbpK4sa',                                
-                name: 'photo',
-                value: cameraPayload,
-                'pk[state]': 'mi',
-                'pk[county]': 'wayne',
-                'pk[city]': 'detroit',
-                'pk[geoid]': '26163',
-                'pk[dataset]': 'sitecontrol',
-                'pk[id]': '110015',    
-                private:1,   
-                x: '42.38127',                                
-                y: '-83.09703'}}
+      options = {body:{token: 'ioLHdpqx3yqQ1SbpK4sa',                                
+         body: 'from android',
+         image: cameraPayload,
+         image_type: 'image/jpeg',
+         address: '1465 Chicago'
+         property_id: '110015',    
+         private:1,   
+         x: '42.38127',                                
+         y: '-83.09703'}}
 
-              $.ajax({
-                 type: "POST",
-                 url: 'http://stage.sitecontrol.us/maps/68/layers/60',
-                 crossDomain: true,
-                 data: options, 
-                 dataType: "json",
-                 success: function(result){
-                   alert("worked");
-                 },error : function() {
-                   alert('boom');
-                 }
-               });
+       $.ajax({
+          type: "POST",
+          url: 'http://stage.sitecontrol.us/comments.json?',
+          crossDomain: true,
+          data: options, 
+          dataType: "json",
+          success: function(result){
+            alert(result);
+          },error : function() {
+            alert('boom');
+          }
+        });
        
     }
   
