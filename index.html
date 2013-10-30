@@ -99,12 +99,12 @@
 
    $.ajax({
       type: "POST",
-      url: 'http://stage.sitecontrol.us/comments.json?',
+      url: 'http://sitecontrol.us/comments.json?',
       crossDomain: true,
       data: options, 
       dataType: "json",
       success: function(result){
-        alert(result);
+        alert(result[0]);
       },error : function() {
         alert('boom');
       }
