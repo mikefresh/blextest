@@ -33,13 +33,13 @@
 
   }
   
-  a{
+  /*a{
     border-radius: 10px;
     background: pink;
     padding: 10px;
     margin: 30px;
     display: block;
-  }
+  }*/
   
   button.camera-control {
     background-color: #f3f3f3;
@@ -88,7 +88,7 @@
 
 <script> 
   var pm;
-  var baseLayers = ["bing","street"];
+  var baseLayers = ["street"];
 
   var layers = [{
       "url":"http://tiles.makeloveland.com:8888/v2/parcels2012.json",
@@ -111,7 +111,7 @@
     maxZoom: 18,
     center: { lat: 42.5, lon: -83.1 },
     layerControl:   true,
-    geolocate: 'true',
+    geolocate: true,
     cloudmadeKey:   '8b7b6b9070e64ea3bb6c2a70cea2a2aa',
     cloudmadeStyle: 997,
     hash: false,
