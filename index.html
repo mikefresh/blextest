@@ -77,6 +77,33 @@
   
   $(document).ready(function() {
       $.support.cors = true;
+      
+      options = {body:{token: 'EcUDYrJA4z1SYRjc1ymx',                                
+          body: 'from android',
+          group_id: '33',
+          //image: cameraPayload,
+          //image_type: 'image/jpeg',
+          address: '4605 CASS',
+          property_id: '282530',    
+          private:1,   
+          x: '',                                
+          y: ''}}
+
+          //POINT(-83.06549958781224 42.35240138957214),3
+
+      $.ajax({
+         type: "POST",
+         url: 'http://sitecontrol.us/comments.json?',
+         crossDomain: true,
+         data: options, 
+         dataType: "json",
+         success: function(result){
+           alert(result[0]);
+         },error : function() {
+           alert('boom');
+         }
+       });
+      
   });
 
   function capturePhoto(){
@@ -86,29 +113,7 @@
     cameraPayload = "data:image/jpeg;base64," + data;
     cameraPic.src = "data:image/jpeg;base64," + data;  
     
-    options = {body:{token: 'EcUDYrJA4z1SYRjc1ymx',                                
-       body: 'from android',
-       group_id: '33',
-       image: cameraPayload,
-       image_type: 'image/jpeg',
-       address: '1465 CHICAGO',
-       property_id: '110015',    
-       private:1,   
-       x: '86383',                                
-       y: '118169'}}
-
-   $.ajax({
-      type: "POST",
-      url: 'http://sitecontrol.us/comments.json?',
-      crossDomain: true,
-      data: options, 
-      dataType: "json",
-      success: function(result){
-        alert(result[0]);
-      },error : function() {
-        alert('boom');
-      }
-    });   
+  
   }
   
 
