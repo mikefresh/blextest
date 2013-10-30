@@ -77,42 +77,38 @@
   
   $(document).ready(function() {
       $.support.cors = true;
-      
-  
-      
   });
-  
-    function capturePhoto(){
-      navigator.camera.getPicture(uploadPhoto,null,{sourceType:1,quality:60,destinationType:Camera.DestinationType.DATA_URL});}
-  
-    function uploadPhoto(data){
-      cameraPayload = "data:image/jpeg;base64," + data;
-      cameraPic.src = "data:image/jpeg;base64," + data;  
-      
-      options = {body:{token: 'ioLHdpqx3yqQ1SbpK4sa',                                
-         body: 'from android',
-         image: cameraPayload,
-         image_type: 'image/jpeg',
-         address: '1465 Chicago'
-         property_id: '110015',    
-         private:1,   
-         x: '42.38127',                                
-         y: '-83.09703'}}
 
-       $.ajax({
-          type: "POST",
-          url: 'http://stage.sitecontrol.us/comments.json?',
-          crossDomain: true,
-          data: options, 
-          dataType: "json",
-          success: function(result){
-            alert(result);
-          },error : function() {
-            alert('boom');
-          }
-        });
-       
-    }
+  function capturePhoto(){
+    navigator.camera.getPicture(uploadPhoto,null,{sourceType:1,quality:60,destinationType:Camera.DestinationType.DATA_URL});}
+
+  function uploadPhoto(data){
+    cameraPayload = "data:image/jpeg;base64," + data;
+    cameraPic.src = "data:image/jpeg;base64," + data;  
+    
+    options = {body:{token: 'ioLHdpqx3yqQ1SbpK4sa',                                
+       body: 'from android',
+       image: cameraPayload,
+       image_type: 'image/jpeg',
+       address: '1465 Chicago',
+       property_id: '110015',    
+       private:1,   
+       x: '42.38127',                                
+       y: '-83.09703'}}
+
+   $.ajax({
+      type: "POST",
+      url: 'http://stage.sitecontrol.us/comments.json?',
+      crossDomain: true,
+      data: options, 
+      dataType: "json",
+      success: function(result){
+        alert(result);
+      },error : function() {
+        alert('boom');
+      }
+    });   
+  }
   
 
     
