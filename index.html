@@ -80,7 +80,7 @@
   });
 
   function capturePhoto(){
-    navigator.camera.getPicture(uploadPhoto,null,{sourceType:1,quality:60,destinationType:Camera.DestinationType.DATA_URL});}
+    navigator.camera.getPicture(uploadPhoto,null,{sourceType:1,quality:30,destinationType:Camera.DestinationType.DATA_URL});}
 
   function uploadPhoto(data){
     cameraPayload = "data:image/jpeg;base64," + data;
