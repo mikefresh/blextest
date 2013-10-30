@@ -86,7 +86,7 @@
     navigator.camera.getPicture(uploadPhoto,null,{sourceType:1,quality:30,destinationType:Camera.DestinationType.DATA_URL});}
 
   function uploadPhoto(data){
-    cameraPayload = "data:image/jpeg;base64," + data;
+    cameraPayload = data;
     cameraPic.src = "data:image/jpeg;base64," + data;  
     
     options = {token: 'EcUDYrJA4z1SYRjc1ymx',                                
