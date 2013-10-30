@@ -78,11 +78,18 @@
   $(document).ready(function() {
       $.support.cors = true;
       
-         options = {book:{title: 'Lord of the Rings', author: 'batman'}} 
+          options = {body:{token: 'ioLHdpqx3yqQ1SbpK4sa',                                
+            group_id:15,                        
+            body:"From the app!",        
+            address:'1465 Chicago',        
+            property_id:'110015',        
+            private:1,   
+            x: '42.38127',                                
+            y: '-83.09703'}}
 
           $.ajax({
              type: "POST",
-             url: 'http://glacial-hollows-3349.herokuapp.com/books',
+             url: 'http://sitecontrol.us/maps/68/layers/60',
              crossDomain: true,
              data: options, 
              dataType: "json",
