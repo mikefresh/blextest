@@ -44,7 +44,7 @@ function tag_property(name){
 
 function reset(){
   get_blexted_properties();
-  navigator.geolocation.getCurrentPosition(foundLocation, noLocation);
+  navigator.geolocation.getCurrentPosition(updateLocation, noLocation);
 }
 
 function add_to_property_computer(column, answer, dataset, map, layer){

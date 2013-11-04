@@ -446,15 +446,22 @@
        marker = L.marker([lat, long], {draggable: true}).addTo(pm.map);
       }
       
-       function noLocation() {
-            alert('Could not find location');
-        }
-        
-        
-        
-        function MapShowCommand(){
-          alert('hello');
-        }
+      function updateLocation(position) {
+        var lat = position.coords.latitude;
+        var long = position.coords.longitude;
+        pm.map.panTo([lat, long])
+        pm.map.setZoom(18);
+        var newLatLng = new L.LatLng(lat, long);
+        marker.setLatLng(newLatLng);
+       }
+      
+     function noLocation() {
+          alert('Could not find location');
+      } 
+      
+      function MapShowCommand(){
+        alert('hello');
+      }
 
   $(document).ready(function(){
 
@@ -487,21 +494,11 @@
       return false
     });
 
-
-
-
-
-
-
     navigator.geolocation.getCurrentPosition(foundLocation, noLocation);
 
   });
 
 </script>
-
-<div id="testing">
-  hi!
-</div>
 
 </body>
 </html>
