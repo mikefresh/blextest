@@ -1,14 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.css" />
+  <link rel="stylesheet" href="jquery.mobile-1.3.2.min.css" />
+  <link rel="stylesheet" href="leaflet.css" />
   <script type="text/javascript" src="mustache.js"></script>  
-
   <script type="text/javascript" src="phonegap.js"></script>
-  
-  <script language="javascript" type="text/javascript" src="jquery.js"></script>
-  <script language="javascript" type="text/javascript" src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script> 
-   
+  <script src="jquery-1.9.1.min.js"></script>
+
   <script language="javascript" type="text/javascript" src="paraffin/lib/leaflet/leaflet.js"></script>
   <script language="javascript" type="text/javascript" src="paraffin.js"></script>
   <script language="javascript" type="text/javascript" src="paraffin/lib/leaflet/plugins/google.js"></script>
@@ -23,7 +21,9 @@
   <script language="javascript" type="text/javascript" src="paraffin/lib/tile/Bing.js"></script>
   <script language="javascript" type="text/javascript" src="paraffin/lib/tile/Google.js"></script>  
  
-  <script language="javascript" type="text/javascript" src="paraffin/lib/jquery.xdomainrequest.js"></script>                                                    
+  <script language="javascript" type="text/javascript" src="paraffin/lib/jquery.xdomainrequest.js"></script>  
+  <script src="jquery.mobile-1.3.2.min.js"></script>      
+  <script type="text/javascript" src="application.js"></script>                                              
 
   
   <style>
@@ -59,42 +59,323 @@
       box-shadow: inset 0 0 30px 0 #999999, 0 1px 0 0 white;
   }
   
+  .ui-field-contain input.ui-input-text, .ui-field-contain textarea.ui-input-text, .ui-field-contain .ui-input-search, .ui-field-contain div.ui-input-text{
+    width: 100%;
+  }
+  
+  
+  /*specify a height for the header so we can line-up the elements, the default is 40px*/
+.ui-header {
+      height : 40px;
+  }
+  
+  .ui-btn-inner{
+   padding: 30px; 
+  }
+
+  /*set the content to be full-width and height except it doesn't overlap the header or footer*/
+.ui-content {
+      position : absolute;
+      top      : 40px;
+      right    : 0;
+      bottom   : 30px;
+      left     : 0;
+      padding: 0px !important;
+  }
+  
+  .inside{
+    padding: 0 10px 0 10px;
+  }
+  
+  .center{
+     text-align: center;
+   }
+
+   .muted{
+     color: #aaaaaa;
+     font-size: 14px;
+   }
+
+  /*absolutely position the footer to the bottom of the page*/
+.ui-footer {
+      position : absolute;
+      bottom   : 0;
+      left     : 0;
+      width    : 100%;
+  }​
+  html, body {
+      height : 100%;
+  }
+
+  
   #themap{
-    height: 200px;
+    height: 100%;
+  }
+  
+  .my-custom-control{
+    padding: 18px;
+    background-color: white;
+    border-radius: 5px;
+    background-image: url('reset.png');
+    background-repeat:no-repeat;
+    background-position:center; 
+  }
+  
+  .my-custom-control:hover{
+        cursor: hand;
+  }
+  
+  
+  
+  .leaflet-control-command-interior
+  {
+      background-image: url('reset.png');
+      width: 20px;
+      height: 20px;
+      background-position: 50% 50%;
+      background-repeat: no-repeat;
+      display: block;
+      padding: 3px;
+      border-radius: 4px;
+      -webkit-border-radius: 4px;
+      -moz-border-radius: 4px;
+      box-shadow: 0 1px 7px rgba(0, 0, 0, 0.65);
+      cursor: auto;
+      text-align: center;
+      background-color: #FFFFFF;
+  }
+
+      .leaflet-control-command-interior:hover
+  {
+      background-color: #F4F4F4;
   }
   
   </style>
   </head>
 <body>
     
-    <p>Testing the view</p>
     
-    <div id="themap">
-      
+    
+<div data-role="page" id="map">
+  <div data-role="header">
+    <h1>Brightmoor Blexting Official</h1>
+  </div><!-- /header -->
+
+  <div data-role="content">
+    <div id="themap"></div>
+  </div><!-- /content -->
+
+  <div data-role="footer">
+    <h4>Loveland</h4>
+  </div><!-- /footer -->
+</div><!-- /page -->
+       
+       
+       
+<div data-role="page" id='question1'>
+  <div data-role="header">
+    <h1>Brightmoor Blexting Official</h1>
+  </div><!-- /header -->
+  <div data-role="content">
+    <div class="inside">
+      <h2 class='center'>Is there a structure on the site?</h2>
+      <p class="center muted">Pellentesque facilisis ante in lorem blandit.</p>
+      <div data-role="controlgroup">
+        <a href="#question2" class="question" data-column="structure" data-answer="yes" data-transition="slide" data-role="button">Yes</a>
+        <a href="#question6" class="question" data-column="structure" data-answer="no"  data-transition="slide" data-role="button">No</a>
+      </div>
+    </div><!-- /inside -->
+  </div><!-- /content -->
+  <div data-role="footer">
+      <h4>Loveland</h4>
+  </div><!-- /footer -->
+</div><!-- /page -->
+
+
+
+<div data-role="page" id='question2'>
+  <div data-role="header">
+    <h1>Brightmoor Blexting Official</h1>
+  </div><!-- /header -->
+  <div data-role="content">
+    <div class="inside">
+      <h2 class='center'>What is the condition of the structure?</h2>
+      <p class="center muted">Pellentesque facilisis ante in lorem blandit.</p>
+      <div data-role="controlgroup">
+        <a href="#question3" class="question" data-column="condition" data-answer="good" data-transition="slide" data-role="button">Good</a>
+        <a href="#question3" class="question" data-column="condition" data-answer="fair" data-transition="slide" data-role="button">Fair</a>
+        <a href="#question3" class="question" data-column="condition" data-tag='poor' data-answer="poor" data-transition="slide" data-role="button">Poor</a>
+        <a href="#question3" class="question" data-column="condition" data-tag='demolition' data-answer="needs demolition" data-transition="slide" data-role="button">Needs Demolition</a>
+      </div>
     </div>
+  </div><!-- /content -->
+  <div data-role="footer">
+    <h4>Loveland</h4>
+  </div><!-- /footer -->
+</div><!-- /page -->
+
+
+
+<div data-role="page" id='question3'>
+  <div data-role="header">
+    <h1>Brightmoor Blexting Official</h1>
+  </div><!-- /header -->
+  <div data-role="content">
+    <div class="inside">
+      <h2 class='center'>Is the structure vacant?</h2>
+      <p class="center muted">Pellentesque facilisis ante in lorem blandit.</p>
+      <div data-role="controlgroup">
+        <a href="#question4" class="question" data-column="vacancy" data-answer="yes" data-transition="slide" data-role="button">Yes</a>
+        <a href="#question4" class="question" data-column="vacancy" data-answer="no" data-transition="slide" data-role="button">No</a>
+      </div>
+    </div>
+  </div><!-- /content -->
+  <div data-role="footer">
+    <h4>Loveland</h4>
+  </div><!-- /footer -->
+</div><!-- /page -->
+
+
+
+<div data-role="page" id='question4'>
+  <div data-role="header">
+    <h1>Brightmoor Blexting Official</h1>
+  </div><!-- /header -->
+  <div data-role="content">
+    <div class="inside">
+      <h2 class='center'>Is the structure open?</h2>
+      <p class="center muted">Is the structure open and in need of boarding?</p>
+      <div data-role="controlgroup">
+        <a href="#question5" class="question" data-column="boarding" data-answer="yes" data-transition="slide" data-role="button">Yes</a>
+        <a href="#question5" class="question" data-column="boarding" data-answer="yes" data-transition="slide" data-role="button">No</a>
+      </div>
+    </div>
+  </div><!-- /content -->
+  <div data-role="footer">
+    <h4>Loveland</h4>
+  </div><!-- /footer -->
+</div><!-- /page -->
+
+
+
+<div data-role="page" id='question5'>
+  <div data-role="header">
+    <h1>Brightmoor Blexting Official</h1>
+  </div><!-- /header -->
+  <div data-role="content">
+    <div class="inside">
+      <h2 class='center'>Is the structure fire damaged?</h2>
+      <p class="center muted">Pellentesque facilisis ante in lorem blandit, in consequat libero tincidunt.</p>
+      <div data-role="controlgroup">
+        <a href="#question6" class="question" data-column="fire" data-answer="yes" data-transition="slide" data-role="button">Yes</a>
+        <a href="#question6" class="question" data-column="fire" data-answer="yes" data-transition="slide" data-role="button">No</a>
+      </div>
+    </div>
+  </div><!-- /content -->
+  <div data-role="footer">
+    <h4>Loveland</h4>
+  </div><!-- /footer -->
+</div><!-- /page -->
+
+
+
+
+<div data-role="page" id='question6'>
+  <div data-role="header">
+     <h1>Brightmoor Blexting Official</h1>
+  </div><!-- /header -->
+  <div data-role="content">
+    <div class="inside">
+      <h2 class='center'>Is the lot improved or unimproved?</h2>
+      <p class="center muted">Pellentesque facilisis ante in lorem blandit.</p>
+
+      <div data-role="controlgroup">
+        <a href="#question7" class="question" data-column="vacantlot" data-answer="improved" data-transition="slide" data-role="button">Improved</a>
+        <a href="#question7" class="question" data-column="vacantlot" data-answer="unimproved" data-transition="slide" data-role="button">Unimproved</a>
+      </div>
+    </div>
+  </div><!-- /content -->
+  <div data-role="footer">
+    <h4>Loveland</h4>
+  </div><!-- /footer -->
+</div><!-- /page -->
+
+
+
+
+<div data-role="page" id='question7'>
+  <div data-role="header">
+    <h1>Brightmoor Blexting Official</h1>
+  </div><!-- /header -->
+
+  <div data-role="content">
+    <div class="inside">
+      <h2 class='center'>Is there dumping on the site?</h2>
+      <p class="center muted">Pellentesque facilisis ante in lorem blandit.</p>
+        <div data-role="controlgroup">
+          <a href="#fin" class="question" data-column="dumping" data-answer="yes" data-transition="slide" data-role="button">Yes</a>
+          <a href="#fin" class="question" data-column="dumping" data-answer="no" data-transition="slide" data-role="button">No</a>
+        </div>
+    </div>
+  </div><!-- /content -->
+
+  <div data-role="footer">
+    <h4>Loveland</h4>
+  </div><!-- /footer -->
+</div><!-- /page -->
+                                 
+                
+                       
+<div data-role="page" id='fin'>
+  <div data-role="header">
+    <h1>Brightmoor Blexting Official</h1>
+  </div><!-- /header -->
+  <div data-role="content">
+    <div class="inside">
+      <h2 class='center'>Any other notes?</h2>
+      <p class="center muted">Pellentesque facilisis ante in lorem blandit.</p>
+      <div data-role="fieldcontain">
+    	  <textarea name="textarea" id="textarea"></textarea>
+      </div>
+      <a href="#map" data-transition="flip" ata-allowSamePageTransition='true' data-role="button">Finish/Next</a>
+    </div><!-- /inside -->
+  </div><!-- /content -->
+  <div data-role="footer">
+    <h4>Loveland</h4>
+  </div><!-- /footer -->
+</div><!-- /page -->
+
 
 
 <script> 
   var pm;
-  var baseLayers = ["street"];
+  var baseLayers = ["bing", "street"];
+  
+  var group = '33'
+  var map   = '241'
+  var layer = '234'
+  var property_id = ''
 
   var layers = [{
+      //"url":"parcels2012.json",
       "url":"http://tiles.makeloveland.com:8888/v2/parcels2012.json",
       "id":"sitecontrol",
       "name":"Parcels",
       "ty":"tilejson",
-      "template":"something",
+      "template":"<div id='camera'><p>{{proaddress}}</p><button class='camera-control' onclick='capturePhoto({{fid}});'>Capture Photo</button><div style='text-align:center;margin:20px;'></div></div>",
       "style":null,
       "style_handler":null,
       "key":null,
       "interaction":true,
       "zindex":2
     }];
+    
+ 
 
   var opts = {
     divId:  'themap',
     geolocate: 'manual',
-    zoom:    18,
+    zoom:    16,
     minZoom: 15,
     maxZoom: 18,
     center: { lat: 42.5, lon: -83.1 },
@@ -105,13 +386,28 @@
     hash: false,
   };
   
+  
+   var fid = ''
    
-   function capturePhoto(){
-      navigator.camera.getPicture(uploadPhoto,null,{sourceType:1,quality:30,destinationType:Camera.DestinationType.DATA_URL});}
+   var marker;
+   
+   function capturePhoto(ffid){
+      property_id = ffid
+      navigator.camera.getPicture(uploadPhoto,null,{sourceType:1,quality:80, targetWidth: 1000,
+        targetHeight: 1000,destinationType:Camera.DestinationType.DATA_URL});
+    }
 
     function uploadPhoto(data){
+      
+      $.mobile.loading( 'show', {
+       	text: 'Uploading Image',
+       	textVisible: true,
+       	theme: 'a',
+       	html: ""
+       });
+      
       cameraPayload = data;
-      cameraPic.src = "data:image/jpeg;base64," + data;  
+      //cameraPic.src = "data:image/jpeg;base64," + data;  
 
       options = {token: 'EcUDYrJA4z1SYRjc1ymx',                                
           body: 'from android',
@@ -119,7 +415,7 @@
           image: cameraPayload,
           image_type: 'image/jpeg',
           address: '4605 CASS',
-          property_id: '282530',    
+          property_id: property_id,    
           private:1,   
           x: '',                                
           y: ''}
@@ -129,11 +425,15 @@
          url: 'http://sitecontrol.us/comments.json?',
          crossDomain: true,
          data: options, 
+         timeout: 20000,
          dataType: "json",
          success: function(result){
-           alert(result[0]);
+           tag_property('blexted');
+           $.mobile.changePage('#question1', { transition: "flip" });
+           $.mobile.loading('hide');
          },error : function() {
-           alert('boom');
+           $.mobile.loading('hide');
+           alert('Sorry problem uploading your image. Try Again');
          }
        });
     }
@@ -150,7 +450,11 @@
             alert('Could not find location');
         }
         
-        var marker;
+        
+        
+        function MapShowCommand(){
+          alert('hello');
+        }
 
   $(document).ready(function(){
 
@@ -158,6 +462,36 @@
 
     pm = new Paraffin.Map(opts); 
     pm.initializeLayers(baseLayers, layers);
+    
+    other = pm.map
+  
+
+    var MyControl = L.Control.extend({
+        options: {
+            position: 'topright'
+        },
+        onAdd: function (other) {
+            // create the control container with a particular class name
+            var container = L.DomUtil.create('div', 'my-custom-control');
+
+            // ... initialize other DOM elements, add listeners, etc.
+
+            return container;
+        }
+    });
+
+    pm.map.addControl(new MyControl());
+
+    $('.my-custom-control').on('click', function(){
+      reset();
+      return false
+    });
+
+
+
+
+
+
 
     navigator.geolocation.getCurrentPosition(foundLocation, noLocation);
 
@@ -165,6 +499,9 @@
 
 </script>
 
+<div id="testing">
+  hi!
+</div>
 
 </body>
 </html>

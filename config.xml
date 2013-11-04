@@ -19,6 +19,8 @@
     
     <gap:platform name="android" />
     <access origin="*" />
+    
+    <gap:splash src="splash.png" />
 
 </widget>
 
