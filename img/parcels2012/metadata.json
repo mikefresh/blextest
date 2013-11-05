@@ -1,0 +1,12 @@
+{
+    "attribution": "", 
+    "description": "", 
+    "center": "-83.1009,42.3527,14", 
+    "bounds": "-83.2889,42.2545,-82.906,42.4514", 
+    "minzoom": "0", 
+    "version": "1.0.0", 
+    "template": "{{#__location__}}{{{parcelnumb}}}{{/__location__}}{{#__teaser__}}<a href='/{{{fid}}}'>{{{proaddress}}}</a><br/>\n{{{ownername1}}}{{/__teaser__}}{{#__full__}}<a href='/{{{fid}}}'>{{{propaddres}}}</a><br/>\n{{{ownername1}}}{{/__full__}}", 
+    "maxzoom": "18", 
+    "legend": "", 
+    "name": "Detroit Parcels 2012"
+}

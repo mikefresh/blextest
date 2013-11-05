@@ -42,7 +42,7 @@ L.UtfGrid = L.Class.extend({
 
 		resolution: 4,
 
-		useJsonP: true,
+		useJsonP: false,
 		pointerCursor: true
 	},
 
@@ -229,7 +229,9 @@ L.UtfGrid = L.Class.extend({
 		var key = zoom + '_' + x + '_' + y;
 		var self = this;
 		L.Util.ajax(url, function (data) {
+		  console.log(data);
 			self._cache[key] = data;
+			
 		});
 	},
 
